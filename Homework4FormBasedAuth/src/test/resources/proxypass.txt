@@ -1,0 +1,27 @@
+httpd.conf
+
+ProxyRequests on
+ProxyPass /KepeslapR2/resource !
+Alias /KepeslapR2/resource "c:/temp/resource/" 
+
+ProxyPass /hu.integrity.kepeslap-web/resource !
+Alias /hu.integrity.kepeslap-web/resource "c:/temp/resource/" 
+
+ProxyPass /KepeslapR2/ ajp://localhost:8009/KepeslapR2/
+#ProxyPassReverse /KepeslapR2/ http://localhost/KepeslapR2
+#ProxyPassReverse /Homework4FormBasedAuth/ http://localhost/Homework4FormBasedAuth
+
+ProxyPass /hu.integrity.kepeslap-web/ ajp://localhost:8009/hu.integrity.kepeslap-web/
+ProxyPass /Homework4FormBasedAuth/ ajp://localhost:8009/Homework4FormBasedAuth/
+
+
+
+Hiba eset:
+
+Helyes authentikáció után nem irányítja át az oldalt az index.xhtml-re a szerver.
+Helyette továbbra is a login.xhtml látszik, és az url egyre több "/" jellel bővül.
+http://localhost/hu.integrity.kepeslap-web///user/index.jsp
+
+Hiányzik a záró "/" jel a ProxyPass
+ProxyPass /Homework4FormBasedAuth ajp://localhost:8009/Homework4FormBasedAuth/
+(javítást lásd fent)

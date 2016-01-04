@@ -1,0 +1,12 @@
+                <security-domain name="JDBCTestRealm">
+                    <authentication>
+                        <login-module code="Database" flag="required">
+                            <module-option name="dsJndiName" value="java:jboss/datasources/Homework4FormBasedAuthDS"/>
+                            <module-option name="principalsQuery" value="select password from v_active_user where username=?"/>
+                            <module-option name="rolesQuery" value="select group_name as userRoles,'Roles' from user_join_group where user_name=?"/>
+                            <module-option name="hashEncoding" value="base64"/>
+                            <module-option name="hashAlgorithm" value="SHA-256"/>
+                            <module-option name="unauthenticatedIdentity" value="anonymousUser"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>

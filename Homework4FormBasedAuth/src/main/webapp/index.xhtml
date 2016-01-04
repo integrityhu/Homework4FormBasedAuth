@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+</h:head>
+<body>
+	<a href="admin/admin.xhtml">wellcome admin page</a>
+	<br />
+	<a href="user/user.xhtml">wellcome user page</a>
+	<br />
+	<a href="user/index.jsp">just login</a>
+	<br />
+	<a href="register.xhtml">register</a>
+	<br />
+	<h:form>
+		<h:commandButton actionListener="#{authBackingBean.logout}"
+			value="kilépés" />
+	</h:form>
+</body>
+</html>

@@ -1,0 +1,32 @@
+check src/main/webapp/WEB-INF/jboss-web.xml, and Homework4FormBasedAuth-ds.xml (Homework4FormBasedAuthDS database)
+create database and admin user for login
+
+put to standalone.xml
+
+<subsystem xmlns="urn:jboss:domain:security:1.2">
+...
+                <security-domain name="JDBCTestRealm">
+                    <authentication>
+                        <login-module code="Database" flag="required">
+                            <module-option name="dsJndiName" value="java:jboss/datasources/Homework4FormBasedAuthDS"/>
+                            <module-option name="principalsQuery" value="select password from v_active_user where username=?"/>
+                            <module-option name="rolesQuery" value="select group_name as Role,'Roles' as Roles from user_join_group where user_name=?"/>
+                            <module-option name="hashEncoding" value="base64"/>
+                            <module-option name="hashAlgorithm" value="SHA-256"/>
+                            <module-option name="unauthenticatedIdentity" value="anonymousUser"/>
+                        </login-module>
+                    </authentication>
+                </security-domain>
+...                
+</security-domains>
+
+INSERT INTO SystemUser (userid, emailAddress, enabled, userpassword, username) VALUES
+(4, 'a@b.hu', true, 'jjXCzTv2ZBvbDiBQt2kyy7LmA0oN2swdm+qCprpX988=', 'terc'),
+(10, 'c.d@exec.hu', true, 'jjXCzTv2ZBvbDiBQt2kyy7LmA0oN2swdm+qCprpX988=', 'porc');
+
+
+INSERT INTO user_join_group (user_name, group_name) VALUES
+('a@b.hu', 'ROLE_USER'),
+('c.d@exec.hu', 'ROLE_ADMIN');
+
+CREATE VIEW v_active_user AS select u.emailAddress AS username,u.userpassword AS password from SystemUser u where (u.enabled = true);
